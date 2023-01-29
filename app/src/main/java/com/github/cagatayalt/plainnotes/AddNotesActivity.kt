@@ -3,6 +3,7 @@ package com.github.cagatayalt.plainnotes
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.InputType
 import android.view.KeyEvent
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
@@ -31,10 +32,10 @@ class AddNotesActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-
         binding.titleEt.apply {
             imeOptions = EditorInfo.IME_ACTION_DONE
-            isSingleLine = true
+            setImeOptions(EditorInfo.IME_ACTION_DONE)
+            inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_MULTI_LINE
             setOnEditorActionListener { _, actionId, _ ->
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
                     // Close the keyboard
@@ -49,8 +50,9 @@ class AddNotesActivity : AppCompatActivity() {
         }
 
         binding.descEt.apply {
+            inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_MULTI_LINE
             imeOptions = EditorInfo.IME_ACTION_DONE
-            isSingleLine = true // Somehow, if this line is deleted, the action button does not change even though all the code except this one
+            setImeOptions(EditorInfo.IME_ACTION_DONE)
             setOnEditorActionListener { _, actionId, _ ->
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
                     // Close the keyboard
@@ -63,7 +65,6 @@ class AddNotesActivity : AppCompatActivity() {
                 }
             }
         }
-
 
 
 
